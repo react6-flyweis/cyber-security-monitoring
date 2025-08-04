@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "@/components/ui/button";
 import DeviceCard from "@/components/DeviceCard";
 import { ChevronLeft, PlusCircle, FileUp } from "lucide-react";
