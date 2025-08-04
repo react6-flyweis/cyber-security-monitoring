@@ -5,6 +5,7 @@ import { Header } from "./components/Header";
 import { SideBar } from "./components/Sidebar";
 
 const DashboardPage = lazy(() => import("@/pages/Dashboard"));
+const DevicesPage = lazy(() => import("@/pages/Devices"));
 
 function App() {
   return (
@@ -12,9 +13,10 @@ function App() {
       <Header />
       <div className="flex">
         <SideBar />
-        <main className="flex-1 p-8">
+        <main className="flex-1 p-8 px-14">
           <Routes>
             <Route path="/" element={<DashboardPage />} />
+            <Route path="/devices" element={<DevicesPage />} />
           </Routes>
         </main>
       </div>
