@@ -1,7 +1,28 @@
-import coverageChartImage from "@/assets/images/coverage-chart.svg";
+import { RadarChart } from "./RadarChart";
 import { Card, CardContent, CardHeader } from "./ui/card";
+import radarSector from "@/assets/images/radar-sector.png";
+import { useNavigate } from "react-router";
 
 export function CoverageChart() {
+  const navigate = useNavigate();
+  // Map sector index to category name
+  const sectorCategories = [
+    "Cloud Posture",
+    "External Footprints",
+    "Dark Web",
+    "Cloud Data",
+    "Email Protection",
+    "Endpoint Security",
+    "Secure Browsing",
+    "Security Awareness",
+    "Phishing Simulations",
+  ];
+  const handleSectorClick = (sector: number) => {
+    const category = sectorCategories[sector];
+    if (category) {
+      navigate(`/detection-response?category=${encodeURIComponent(category)}`);
+    }
+  };
   return (
     <Card>
       <CardHeader>
@@ -24,11 +45,16 @@ export function CoverageChart() {
         </div>
       </CardHeader>
       <CardContent>
-        <img
-          src={coverageChartImage}
-          alt="Coverage Chart"
-          className="w-full block mx-auto"
-        />
+        <div className="relative">
+          <img
+            src={radarSector}
+            alt="Coverage Chart"
+            className=" inset-0 w-full block mx-auto pt-2"
+          />
+          <div className="absolute inset-0">
+            <RadarChart onSectorClick={handleSectorClick} />
+          </div>
+        </div>
       </CardContent>
     </Card>
   );
