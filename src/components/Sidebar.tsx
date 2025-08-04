@@ -63,9 +63,9 @@ const menuItems = [
   },
 ];
 
-const Sidebar = () => {
+export function SideBar() {
   return (
-    <aside className="w-72 bg-white min-h-screen shadow py-6 flex flex-col gap-1">
+    <aside className="w-64 bg-white min-h-screen shadow py-6 flex flex-col gap-1">
       {menuItems.map((item, idx) => (
         <div
           key={item.label}
@@ -93,6 +93,4 @@ const Sidebar = () => {
       ))}
     </aside>
   );
-};
-
-export default Sidebar;
+}
