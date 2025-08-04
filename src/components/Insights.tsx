@@ -1,5 +1,7 @@
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
+import { Switch } from "./ui/switch";
+import { Lightbulb, SettingsIcon, Shield } from "lucide-react";
 
 const insights = [
   {
@@ -9,6 +11,7 @@ const insights = [
       "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for",
     action: "Activate",
     highlight: true,
+    ignored: false,
   },
   {
     type: "Tips",
@@ -17,6 +20,7 @@ const insights = [
       "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for",
     action: null,
     highlight: false,
+    ignored: false,
   },
   {
     type: "Tips",
@@ -25,6 +29,7 @@ const insights = [
       "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for",
     action: null,
     highlight: false,
+    ignored: false,
   },
   {
     type: "Tips",
@@ -33,30 +38,51 @@ const insights = [
       "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for",
     action: null,
     highlight: false,
+    ignored: true,
   },
 ];
 
 export function Insights() {
+  // Icon mapping by type
+  const getIcon = (type: string) => {
+    switch (type) {
+      case "Security":
+        return <Shield className="text-pink-500" size={20} />;
+      case "Tips":
+        return <Lightbulb className="text-yellow-400" size={20} />;
+      case "Operations":
+        return <SettingsIcon className="text-yellow-500" size={20} />;
+      default:
+        return <Lightbulb className="text-yellow-400" size={20} />;
+    }
+  };
+
   return (
-    <div className="bg-white rounded-xl p-4 shadow-md w-full max-w-md mx-auto">
-      <div className="flex items-center gap-2 mb-4">
-        <h2 className="font-semibold text-lg">Insights (11)</h2>
-        <div className="flex gap-2 ml-auto">
-          <span className="bg-red-100 text-red-600 px-2 py-1 rounded text-xs font-medium">
-            Security
+    <div className="bg-white rounded-xl p-4 shadow-md h-[26rem] w-full max-w-md mx-auto">
+      <div className="flex gap-2 mb-4 max-w-full">
+        <h2 className="font-semibold text-lg text-nowrap">Insights (11)</h2>
+        <div className="flex gap-2 ml-auto flex-wrap">
+          <span className="border  p-0.5 rounded text-xs font-medium flex items-center gap-1">
+            <Shield className="w-4 h-4 text-red-600" /> Security
           </span>
-          <span className="bg-yellow-100 text-yellow-600 px-2 py-1 rounded text-xs font-medium">
-            Tips
+          <span className="border  p-0.5 rounded text-xs font-medium flex items-center gap-1">
+            <Lightbulb className="w-4 h-4 text-yellow-600" /> Tips
           </span>
-          <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-medium">
-            Operations
+          <span className="border  p-0.5 rounded text-xs font-medium flex items-center gap-1">
+            <SettingsIcon className="w-4 h-4 text-yellow-600" /> Operations
           </span>
-          <span className="bg-gray-100 text-gray-500 px-2 py-1 rounded text-xs font-medium">
-            Ignored
+          <span className=" text-gray-500  text-xs font-medium flex items-center gap-1">
+            <Switch
+              checked={true}
+              className="ml-1"
+              aria-label="Ignore insight"
+              disabled
+            />
+            ignored
           </span>
         </div>
       </div>
-      <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2">
+      <div className="space-y-3 overflow-y-auto pr-2 max-h-[20rem]">
         {insights.map((item, idx) => (
           <Card
             key={idx}
@@ -67,17 +93,7 @@ export function Insights() {
             }
           >
             <div className="flex items-center gap-2">
-              <span className="text-yellow-400">
-                {/* Icon placeholder, replace with actual icon if needed */}
-                <svg
-                  width="20"
-                  height="20"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M10 2a1 1 0 0 1 1 1v1.382a1 1 0 0 0 .553.894l.894.447a1 1 0 0 1 .553.894V8a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V6.618a1 1 0 0 1 .553-.894l.894-.447A1 1 0 0 0 9 4.382V3a1 1 0 0 1 1-1zm-1 10a1 1 0 0 1 2 0v4a1 1 0 0 1-2 0v-4z" />
-                </svg>
-              </span>
+              <span>{getIcon(item.ignored ? "Ignored" : item.type)}</span>
               <span className="font-semibold text-xs flex-1">{item.title}</span>
               {item.action && (
                 <Button
