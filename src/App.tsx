@@ -6,6 +6,7 @@ import { SideBar } from "./components/Sidebar";
 
 const DashboardPage = lazy(() => import("@/pages/Dashboard"));
 const DevicesPage = lazy(() => import("@/pages/Devices"));
+const DetectionResponsePage = lazy(() => import("@/pages/DetectionResponse"));
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
           <Routes>
             <Route path="/" element={<DashboardPage />} />
             <Route path="/devices" element={<DevicesPage />} />
+            <Route
+              path="/detection-response"
+              element={<DetectionResponsePage />}
+            />
           </Routes>
         </main>
       </div>
