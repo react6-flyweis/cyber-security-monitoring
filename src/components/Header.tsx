@@ -7,7 +7,11 @@ import {
   SelectItem,
 } from "./ui/select";
 import { Switch } from "./ui/switch";
-import { Handshake, ClipboardList, Users } from "lucide-react";
+import { PlusIcon } from "lucide-react";
+
+import handShakeIcon from "@/assets/icons/handshake.png";
+import clipboardListIcon from "@/assets/icons/notebook.png";
+import usersIcon from "@/assets/icons/group.png";
 
 export function Header() {
   return (
@@ -43,16 +47,25 @@ export function Header() {
       {/* Right Section */}
       <div className="flex items-center gap-4">
         <Button variant="ghost" size="icon">
-          <Handshake className="w-6 h-6 text-gray-400" />
+          <img
+            src={handShakeIcon}
+            alt="Handshake"
+            className="max-w-7 max-h-7"
+          />
         </Button>
         <Button variant="ghost" size="icon">
-          <ClipboardList className="w-6 h-6 text-gray-400" />
+          <img
+            src={clipboardListIcon}
+            alt="Clipboard List"
+            className="max-w-7 max-h-7"
+          />
         </Button>
         <Button variant="ghost" size="icon">
-          <Users className="w-6 h-6 text-gray-400" />
+          <img src={usersIcon} alt="Users" className="max-w-7 max-h-7" />
         </Button>
-        <Button className="bg-purple-600 text-white font-semibold px-6">
-          <span className="mr-2 text-lg">+</span>New
+        <Button className="rounded w-28">
+          <PlusIcon className="w-4 h-4" />
+          New
         </Button>
       </div>
     </header>
