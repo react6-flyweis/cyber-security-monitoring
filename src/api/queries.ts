@@ -15,6 +15,6 @@ export const useGetAllUsersPollQuery = () => {
       return data;
     },
     select: (data) => data.data,
-    refetchInterval: 30000, // Refetch every 30 seconds
+    refetchInterval: 10000, // Refetch every 10 seconds
   });
 };
