@@ -49,9 +49,9 @@ export function CoverageChart() {
           <img
             src={radarSector}
             alt="Coverage Chart"
-            className=" inset-0 w-full block mx-auto pt-2"
+            className="absolute inset-0 w-full"
           />
-          <div className="absolute inset-0">
+          <div className="pt-6 mb-8">
             <RadarChart onSectorClick={handleSectorClick} />
           </div>
         </div>
