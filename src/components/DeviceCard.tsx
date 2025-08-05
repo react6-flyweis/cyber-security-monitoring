@@ -1,4 +1,5 @@
 import React from "react";
+import { cn } from "../lib/utils";
 import { Button } from "./ui/button";
 
 import {
@@ -11,15 +12,17 @@ import {
 import { ArrowUpIcon, ChevronRightIcon } from "lucide-react";
 
 interface DeviceCardProps {
-  name: string;
-  user: string;
-  ip: string;
-  os: string;
-  status: string;
-  risk: string;
-  threats: number;
-  lastSeen: string;
-  compliance: string;
+  data: {
+    name: string;
+    user: string;
+    ip: string;
+    os: string;
+    status: string;
+    risk: string;
+    threats: string;
+    lastSeen: string;
+    compliance: string;
+  };
 }
 
 const statusIcon = {
@@ -32,16 +35,8 @@ const complianceIcon = {
   "Non-Compliant": "❌",
 };
 
-const DeviceCard: React.FC<DeviceCardProps> = ({
-  name,
-  user,
-  ip,
-  os,
-  status,
-  risk,
-  threats,
-  lastSeen,
-  compliance,
+export const DeviceCard: React.FC<DeviceCardProps> = ({
+  data: { name, user, ip, os, status, risk, threats, lastSeen, compliance },
 }) => {
   return (
     <Card className="py-3 gap-2 border-0 shadow">
@@ -114,4 +109,37 @@ const DeviceCard: React.FC<DeviceCardProps> = ({
   );
 };
 
-export default DeviceCard;
+const SkeletonLine = ({ className }: { className?: string }) => (
+  <div className={cn("bg-gray-200 animate-pulse rounded h-4", className)} />
+);
+
+export const DeviceCardSkeleton: React.FC = () => (
+  <Card className="py-3 gap-2 border-0 shadow">
+    <CardHeader className="px-3 flex items-center justify-between">
+      <div className="text-sm text-gray-500 mb-1">Device Name:</div>
+      <SkeletonLine className="w-32 mb-2" />
+    </CardHeader>
+    <CardContent className="px-3">
+      <div className="bg-gray-100 rounded p-3 mb-3 space-y-2">
+        <div className="flex justify-between items-center mb-1">
+          <SkeletonLine className="w-16" />
+          <SkeletonLine className="w-12 h-6" />
+        </div>
+        <SkeletonLine className="w-24" />
+        <SkeletonLine className="w-40" />
+        <SkeletonLine className="w-32" />
+        <SkeletonLine className="w-28" />
+        <SkeletonLine className="w-36" />
+        <SkeletonLine className="w-20" />
+        <SkeletonLine className="w-32" />
+      </div>
+    </CardContent>
+    <CardFooter className="px-3">
+      <div className="grid grid-cols-3 gap-2 w-full">
+        <SkeletonLine className="h-8 w-full" />
+        <SkeletonLine className="h-8 w-full" />
+        <SkeletonLine className="h-8 w-full" />
+      </div>
+    </CardFooter>
+  </Card>
+);
