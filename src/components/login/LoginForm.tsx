@@ -78,7 +78,7 @@ export function LoginForm() {
                     <Input
                       {...field}
                       className="h-10 rounded bg-accent"
-                      placeholder="hannah.green@test.com"
+                      placeholder="test@mail.com"
                       type="email"
                     />
                   </FormControl>
@@ -98,7 +98,6 @@ export function LoginForm() {
                     <PasswordInput
                       {...field}
                       className="h-10 rounded bg-accent"
-                      placeholder="Password123@"
                     />
                   </FormControl>
                   <FormMessage />

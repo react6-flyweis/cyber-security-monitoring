@@ -14,17 +14,17 @@ function App() {
   return (
     <Suspense fallback={<LoadingScreen />}>
       <Routes>
-        <Route
-          element={
-            <AuthWrapper>
-              <AuthLayout />
-            </AuthWrapper>
-          }
-        >
+        <Route element={<AuthLayout />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<div>Register Page</div>} />
         </Route>
-        <Route element={<Layout />}>
+        <Route
+          element={
+            <AuthWrapper>
+              <Layout />
+            </AuthWrapper>
+          }
+        >
           <Route path="/" element={<DashboardPage />} />
           <Route path="/devices" element={<DevicesPage />} />
           <Route
