@@ -108,20 +108,7 @@ export default function Devices() {
               <DeviceCardSkeleton key={idx} />
             ))
           : data.docs.map((device, idx) => (
-              <DeviceCard
-                key={idx}
-                data={{
-                  name: device.name,
-                  user: device.name,
-                  ip: device.ipAddress,
-                  os: device.osVersion,
-                  status: device.isOnline ? "Active" : "Inactive",
-                  risk: device.riskLevel,
-                  threats: device.threatsDetected,
-                  lastSeen: new Date(device.createdAt).toLocaleString(),
-                  compliance: device.complianceStatus,
-                }}
-              />
+              <DeviceCard key={idx} data={device} />
             ))}
       </div>
     </div>

@@ -7,6 +7,7 @@ export interface IUserListItem {
   email: string;
   isOnline: boolean;
   isVerified: boolean;
+  deviceName: string;
   name: string;
   otp: string;
   profilePicture: string;

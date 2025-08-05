@@ -10,19 +10,10 @@ import {
   CardFooter,
 } from "./ui/card";
 import { ArrowUpIcon, ChevronRightIcon } from "lucide-react";
+import type { IUserListItem } from "@/types/devices";
 
 interface DeviceCardProps {
-  data: {
-    name: string;
-    user: string;
-    ip: string;
-    os: string;
-    status: string;
-    risk: string;
-    threats: string;
-    lastSeen: string;
-    compliance: string;
-  };
+  data: IUserListItem;
 }
 
 const statusIcon = {
@@ -30,19 +21,34 @@ const statusIcon = {
 };
 const riskIcon = {
   High: "🟠",
+  Medium: "🟡",
 };
+
+// full , partial, none
 const complianceIcon = {
-  "Non-Compliant": "❌",
+  Full: "✅",
+  Partial: "⚠️",
+  None: "❌",
 };
 
 export const DeviceCard: React.FC<DeviceCardProps> = ({
-  data: { name, user, ip, os, status, risk, threats, lastSeen, compliance },
+  data: {
+    name,
+    deviceName,
+    ipAddress,
+    osVersion,
+    riskLevel,
+    threatsDetected,
+    createdAt,
+    complianceStatus,
+  },
 }) => {
+  const status = "Active"; // Assuming status is always "Active" for this example
   return (
     <Card className="py-3 gap-2 border-0 shadow">
       <CardHeader className="px-3 flex items-center justify-between">
         <div className="text-sm text-gray-500 mb-1">Device Name:</div>
-        <CardTitle className="font-bold  text-lg mb-2">{name}</CardTitle>
+        <CardTitle className="font-bold  text-lg mb-2">{deviceName}</CardTitle>
       </CardHeader>
       <CardContent className="px-3">
         {/* User Section */}
@@ -61,10 +67,10 @@ export const DeviceCard: React.FC<DeviceCardProps> = ({
             </Button>
           </div>
           <div className="font-semibold text-base text-foreground mb-2">
-            {user}
+            {name}
           </div>
-          <div className="">IP Address: {ip}</div>
-          <div className="">OS & Version: {os}</div>
+          <div className="">IP Address: {ipAddress}</div>
+          <div className="">OS & Version: {osVersion}</div>
           <div className="flex items-center gap-1">
             Status:{" "}
             <span>{(statusIcon as Record<string, string>)[status] || ""}</span>{" "}
@@ -72,17 +78,22 @@ export const DeviceCard: React.FC<DeviceCardProps> = ({
           </div>
           <div className="flex items-center gap-1">
             Risk Level:
-            <span>{(riskIcon as Record<string, string>)[risk] || ""}</span>{" "}
-            <span>{risk}</span>
+            <span>
+              {(riskIcon as Record<string, string>)[riskLevel] || ""}
+            </span>{" "}
+            <span>{riskLevel}</span>
           </div>
-          <div className="">Threats Detected: {threats}</div>
-          <div className="">Last Seen: {lastSeen}</div>
+          <div className="">Threats Detected: {threatsDetected}</div>
+          <div className="">
+            Last Seen: {new Date(createdAt).toLocaleDateString()}
+          </div>
           <div className=" flex items-center gap-1">
             Compliance Status:
             <span>
-              {(complianceIcon as Record<string, string>)[compliance] || ""}
+              {(complianceIcon as Record<string, string>)[complianceStatus] ||
+                ""}
             </span>
-            <span>{compliance}</span>
+            <span>{complianceStatus}</span>
           </div>
         </div>
       </CardContent>
