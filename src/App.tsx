@@ -1,8 +1,9 @@
 import { Routes, Route } from "react-router";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { Layout } from "@/components/Layout";
 import { AuthLayout } from "@/components/AuthLayout";
 import { AuthWrapper } from "./components/AuthWrapper";
+import { LoadingScreen } from "@/components/LoadingScreen";
 
 const Login = lazy(() => import("@/pages/Login"));
 const DashboardPage = lazy(() => import("@/pages/Dashboard"));
@@ -11,6 +12,7 @@ const DetectionResponsePage = lazy(() => import("@/pages/DetectionResponse"));
 
 function App() {
   return (
+    <Suspense fallback={<LoadingScreen />}>
       <Routes>
         <Route
           element={
@@ -31,6 +33,7 @@ function App() {
           />
         </Route>
       </Routes>
+    </Suspense>
   );
 }
 
